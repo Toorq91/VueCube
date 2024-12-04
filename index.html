@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3 Perspective Playground</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="cube">
+            <div class="face front">Front</div>
+            <div class="face back">Back</div>
+            <div class="face left">Left</div>
+            <div class="face right">Right</div>
+            <div class="face top">Top</div>
+            <div class="face bottom">Bottom</div>
+        </div>
+    </div>
+    
+    <css-doodle>
+        :doodle {
+            @grid: 1x5 / 100vmax;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+        }
+    
+        @size: 100% 150%;
+        position: absolute;
+    
+        background: @m(100, (
+            linear-gradient(transparent, @p(
+                #008000@repeat(2, @p([0-9a-f])),
+                #FB3569@repeat(2, @p([0-9a-f]))
+            ))
+            @r(0%, 100%) @r(0%, 100%) /
+            @r(1px) @r(23vmin)
+            no-repeat
+            ));
+    
+        will-change: transform;
+        animation: f 50s linear calc(-50s / @size() * @i()) infinite;
+        @keyframes f {
+            from { transform: translateY(-100%) }
+            to { transform: translateY(100%) }
+        }
+    </css-doodle>
+    <script src="https://unpkg.com/css-doodle@0.6.1/css-doodle.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="app.js"></script>
+</body>
+</html>
