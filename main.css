@@ -6,16 +6,16 @@
 .container {
     width: 200px;
     height: 200px;
-    perspective: 500px;
+    perspective: 1000px;
     margin: 100px;
-  }
+}
   
 .cube {
     position: relative;
     width: 200px;
     height: 200px;
     transform-style: preserve-3d;
-    animation: turn 5s infinite linear;
+    animation: turn 7s infinite linear;
 }
   
 .face {
@@ -24,6 +24,7 @@
     background: skyblue;
     border: 2px solid black;
     position: absolute;
+    backface-visibility: hidden;
     opacity: 0.5;
     display: flex;
     align-items: center;
@@ -34,47 +35,51 @@
 
 @keyframes turn {
     0% {
-        transform: rotateX(0) rotateY(0);
+        transform: rotateX(0deg) rotateY(0deg); /* Front face */
+    }
+    16.67% {
+        transform: rotateX(0deg) rotateY(90deg); /* Right face */
+    }
+    33.33% {
+        transform: rotateX(0deg) rotateY(180deg); /* Back face */
+    }
+    50% {
+        transform: rotateX(0deg) rotateY(270deg); /* Left face */
+    }
+    66.67% {
+        transform: rotateX(90deg) rotateY(270deg); /* Top face */
+    }
+    83.33% {
+        transform: rotateX(-90deg) rotateY(270deg); /* Bottom face */
     }
     100% {
-        transform: rotateX(360deg) rotateY(360deg);
+        transform: rotateX(0deg) rotateY(0deg); /* Reset to Front face */
     }
 }
 
-/* @media (prefers-reduced-motion: reduce) {
-    .cube {
-        animation: none;
-        transform: rotate3d(1, 1, 0, 45deg);
-    }
-} */
-
 .front {
     transform: translateZ(100px);
-  }
+}
 
-  .back {
+.back {
     transform: translateZ(-100px) rotateY(180deg);
-  }
+}
   
-  .left {
+.left {
     transform: translateX(-100px) rotateY(-90deg);
-  }
+}
   
-  .right {
+.right {
     transform: translateX(100px) rotateY(90deg);
-  }
+}
   
-  .top {
+.top {
     transform: translateY(-100px) rotateX(90deg);
-  }
+}
   
-  .bottom {
+.bottom {
     transform: translateY(100px) rotateX(-90deg);
-  }
-
-
-
-
+}
 
 body {
     font-family: sans-serif;
